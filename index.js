@@ -1,23 +1,28 @@
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
-const Employee = require("./lib/Employee");
 const Intern = require("./lib/Intern");
 const inquirer = require('inquirer');
+const fs = require('fs');
+const template = require('./src/template')
+
+const managerArrays = [];
 const internArrays = [];
 const engineerArrays = [];
-const employeeArrays = [];
+
+const team = []; //main array for all team memebrs
+
 
 inquirer.prompt([
     {
         type: "input",
-        name: "managerName",
-        message: "What is the team manager name?",
+        name: "managerId",
+        message: "What is the team manager id?",
         
     },
     {
         type: "input",
-        name: "managerId",
-        message: "What is the team manager id?",
+        name: "managerName",
+        message: "What is the team manager name?",
         
     },
     {
@@ -33,12 +38,11 @@ inquirer.prompt([
         
     },
 ])
-.then(({managerName,managerId,managerEmail,managerOfficeNumber}) =>{
-    const managerN = managerName;
-    const managerI = managerId;
-    const managerE = managerEmail;
-    const managerO = managerOfficeNumber;
-    
+.then(({managerId,managerName,managerEmail,managerOfficeNumber}) =>{
+ 
+    const newManager = new Manager(managerName,managerId,managerEmail,managerOfficeNumber);
+    console.log("line 42",typeof(newManager),newManager, newManager.name);
+    managerArrays.push(newManager);
     managerChoice();
     
 })
@@ -48,7 +52,7 @@ function managerChoice(){
         type: "list",
         name: "choices",
         message: "Which type of team member would you like to add?",
-        choices: [ 'Engineer','Intern','Employee','No More Emplyees']
+        choices: [ 'Engineer','Intern','No More Emplyees']
     }])
     .then(({choices}) =>{
 
@@ -58,11 +62,8 @@ function managerChoice(){
         }else if(choices === "Intern"){
             internGetPrompt();
            
-        }else if(choices === "Employee"){
-            employeeGetPrompt();
-            
         }else{
-            return
+            createFile();
         }
     })
 }
@@ -142,37 +143,16 @@ function engineerGetPrompt(){
     })
 }
 
-function employeeGetPrompt(){
-    inquirer.prompt([
-        {
-            type: "input",
-            name: "employeeId",
-            message: "What is the team employee id?",
-                
-        },
-        {
-            type: "input",
-            name: "employeeName",
-            message: "What is the team employee name?",
-                
-        },
-        {
-            type: "input",
-            name: "employeeEmail",
-            message: "What is the team employee email?",
-            
-        },
 
-    ])
-    .then(({employeeId, employeeName, employeeEmail})=>{
-        const newEmployee = new Employee();
-        newEmployee.getRole(employeeId, employeeName, employeeEmail);
-        employeeArrays.push(newEmployee);
-        console.log(employeeArrays);
-        managerChoice();
-    })
-}
 // Need to start on this function by tomorrow :O
 function createFile(){
-
+    let data = template(managerArrays);
+    console.log(data);
+    fileName =`<p>This works<p>`
+    fs.writeFile("dist/index.html", fileName, err =>{
+        if(err){
+            console.log(err);
+        }
+    })
+    console.log("\x1b[33m%s\x1b[0m", "Check The Output Folder To Get Your HTML File");
 }
