@@ -9,9 +9,6 @@ const managerArrays = [];
 const internArrays = [];
 const engineerArrays = [];
 
-const team = []; //main array for all team memebrs
-
-
 inquirer.prompt([
     {
         type: "input",
@@ -41,7 +38,7 @@ inquirer.prompt([
 .then(({managerId,managerName,managerEmail,managerOfficeNumber}) =>{
  
     const newManager = new Manager(managerName,managerId,managerEmail,managerOfficeNumber);
-    console.log("line 42",typeof(newManager),newManager, newManager.name);
+    console.log(newManager);
     managerArrays.push(newManager);
     managerChoice();
     
@@ -96,12 +93,11 @@ function internGetPrompt(){
             
         },    
     ])
-    .then(({ internId,internName, internEmail,internSchool}) =>{
-        
-        const newIntern = new Intern()
-        newIntern.getRole(internId, internName, internEmail, internSchool);
+    .then(({ internId,internName, internEmail,internSchool}) =>{      
+        const newIntern = new Intern(internName,internId,internEmail,internSchool);
         internArrays.push(newIntern);
         console.log(internArrays);
+        console.clear();
         managerChoice();
     })
 }
@@ -135,21 +131,18 @@ function engineerGetPrompt(){
         }, 
     ])
     .then(({engineerId,engineerName,engineerEmail,engineerGithub})=>{
-        const newEngineer = new Engineer();
-        newEngineer.getRole(engineerId,engineerName,engineerEmail,engineerGithub);
+        const newEngineer = new Engineer(engineerName,engineerId,engineerEmail,engineerGithub);
         engineerArrays.push(newEngineer);
         console.log(engineerArrays);
         managerChoice();
     })
 }
 
-
 // Need to start on this function by tomorrow :O
 function createFile(){
-    let data = template(managerArrays);
+    let data = template(managerArrays,engineerArrays,internArrays);
     console.log(data);
-    fileName =`<p>This works<p>`
-    fs.writeFile("dist/index.html", fileName, err =>{
+    fs.writeFile("dist/index.html", data, err =>{
         if(err){
             console.log(err);
         }
