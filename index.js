@@ -96,8 +96,6 @@ function internGetPrompt(){
     .then(({ internId,internName, internEmail,internSchool}) =>{      
         const newIntern = new Intern(internName,internId,internEmail,internSchool);
         internArrays.push(newIntern);
-        console.log(internArrays);
-        console.clear();
         managerChoice();
     })
 }
@@ -133,15 +131,13 @@ function engineerGetPrompt(){
     .then(({engineerId,engineerName,engineerEmail,engineerGithub})=>{
         const newEngineer = new Engineer(engineerName,engineerId,engineerEmail,engineerGithub);
         engineerArrays.push(newEngineer);
-        console.log(engineerArrays);
         managerChoice();
     })
 }
 
-// Need to start on this function by tomorrow :O
+
 function createFile(){
     let data = template(managerArrays,engineerArrays,internArrays);
-    console.log(data);
     fs.writeFile("dist/index.html", data, err =>{
         if(err){
             console.log(err);

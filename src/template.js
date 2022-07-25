@@ -13,48 +13,49 @@ const templateGenerator = (manager,engineer,intern)=>{
 // <div>${templateGenerator(manager, eng, intern)}</div>
 module.exports = (manager, engineer, intern) => {
 
-    function createString(){
-
-    }
-    console.log(engineer[0].id);
-
     let HTMLString = "";
     
     manager.forEach(element => {
         HTMLString += `
-        <div class="card text-bg-light mb-3" style="max-width: 18rem;margin: 0 auto;float: none;margin-bottom: 10px;">
-            <div class="card-header">Manager</div>
-            <div class="card-body">
-                <div>ID:${element.id}</div>
-                <div>Name:${element.name}</div>
-                <div>Email:${element.email}</div>
-                <div>Office Number:${element.officeNumber}</div>
-            </div>
-      </div>`
+      <div class="card text-bg-light mb-3" style="max-width: 18rem;margin: 0 auto;float: none;margin-bottom: 10px;">
+            <div class="card-header bg-primary mb-3">Manager</div>
+                <ul class="list-group list-group-flush">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"Email: ${element.id}</li>
+                        <li class="list-group-item">Name: ${element.name}</li>
+                        <li class="list-group-item">Email: ${element.email}</li>
+                        <li class="list-group-item">Office Number: ${element.officeNumber}</li>
+                    </ul>
+                </ul>        
+        </div>`
     });
     engineer.forEach(element => {
         HTMLString += `
-        <div class="card text-bg-light mb-3"style="max-width: 18rem;margin: 0 auto;float: none;margin-bottom: 10px;">
-            <div class="card-header">Enginner</div>
-            <div class="card-body">
-                <div>ID:${element.id}</div>
-                <div>Name:${element.name}</div>
-                <div>Email:${element.email}</div>
-                <div>GitHub:${element.github}</div>
-            </div>
-      </div>`
+        <div class="card text-bg-light mb-3" style="max-width: 18rem;margin: 0 auto;float: none;margin-bottom: 10px;">
+            <div class="card-header bg-primary mb-3">Enginner</div>
+                <ul class="list-group list-group-flush">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"Email: ${element.id}</li>
+                        <li class="list-group-item">Name: ${element.name}</li>
+                        <li class="list-group-item">Email: ${element.email}</li>
+                        <li class="list-group-item">Office Number: ${element.github}</li>
+                    </ul>
+                </ul>        
+        </div>`
     });
     intern.forEach(element => {
         HTMLString += `
         <div class="card text-bg-light mb-3" style="max-width: 18rem;margin: 0 auto;float: none;margin-bottom: 10px;">
-            <div class="card-header">Intern</div>
-            <div class="card-body">
-                <div>ID:${element.id}</div>
-                <div>Name:${element.name}</div>
-                <div>Email:${element.email}</div>
-                <div>School:${element.school}</div>
-            </div>
-      </div>`
+            <div class="card-header bg-primary mb-3">Intern</div>
+                <ul class="list-group list-group-flush">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"Email: ${element.id}</li>
+                        <li class="list-group-item">Name: ${element.name}</li>
+                        <li class="list-group-item">Email: ${element.email}</li>
+                        <li class="list-group-item">Office Number: ${element.school}</li>
+                    </ul>
+                </ul>        
+        </div>`
     });
 
     return `<!DOCTYPE html>
@@ -67,10 +68,18 @@ module.exports = (manager, engineer, intern) => {
     </head>
     <body>
     <h1 style="
+    border: 1px;
     text-align: center;
+    background: lightcoral;
+    padding: 20px;
     ">My Team</h1>
-
-    ${HTMLString}
+    <div class="container" style="
+        margin-top: 30px;">
+        <div class="row"> 
+        ${HTMLString}  
+        </div>
+    </div>
+    
 
     </body>
     </html>
