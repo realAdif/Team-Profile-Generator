@@ -142,5 +142,5 @@ function createFile(){
             console.log(err);
         }
     })
-    console.log("\x1b[33m%s\x1b[0m", "Check The Output Folder To Get Your HTML File");
+    console.log("\x1b[33m%s\x1b[0m", "Check dist folder for the output to get your HTML file :)");
 }
