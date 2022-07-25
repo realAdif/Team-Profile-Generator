@@ -38,7 +38,6 @@ inquirer.prompt([
 .then(({managerId,managerName,managerEmail,managerOfficeNumber}) =>{
  
     const newManager = new Manager(managerName,managerId,managerEmail,managerOfficeNumber);
-    console.log(newManager);
     managerArrays.push(newManager);
     managerChoice();
     
