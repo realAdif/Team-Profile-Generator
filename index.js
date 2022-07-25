@@ -135,7 +135,6 @@ function engineerGetPrompt(){
     })
 }
 
-
 function createFile(){
     let data = template(managerArrays,engineerArrays,internArrays);
     fs.writeFile("dist/index.html", data, err =>{
